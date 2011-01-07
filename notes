@@ -1,5 +1,5 @@
 1/3/2010
-
+--------
 Admin
 Email ID: cs255ta@cs
 
@@ -29,7 +29,7 @@ Shannon perfect secrecy definition - Pr over all keys for any 2 messages
 and any ciphertext that E(k, m_i)=c is same.
 
 1/5/2011
-
+--------
 Recap
 Stream ciphers make OTP practical
   PRG, predictability and unpredictablity definitions
