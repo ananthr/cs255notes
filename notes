@@ -63,5 +63,7 @@ Hardware stream ciphers
 
 Good ciphers?
   ESTREAM project
-  Trivium, well-designed
+  Trivium, well-designed for shift registers
+  Different ciphers to be used on processors with word/double-word
+  granularity
   
