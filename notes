@@ -1,0 +1,67 @@
+1/3/2010
+
+Admin
+Email ID: cs255ta@cs
+
+SSL
+PGP - privacy + dig signature
+user auth - pwd management, smart cards, challenge-response
+wireless - 802.11i, WEP, WPA2
+
+Other
+Elections
+Auctions
+Digital Cash
+Copy Protection- DVD CSS, AACS
+A5/1, A5/2 for GSM
+
+History
+Substitution cipher and breaking it
+Vigenere's Cipher
+Rotor Machines
+DES
+AES
+
+Define block cipher
+Vernam cipher, OTP
+
+Shannon perfect secrecy definition - Pr over all keys for any 2 messages
+and any ciphertext that E(k, m_i)=c is same.
+
+1/5/2011
+
+Recap
+Stream ciphers make OTP practical
+  PRG, predictability and unpredictablity definitions
+  weak PRG - linear congruential generator 
+    broken
+    glibc
+    r[i]=r[i-3]+r[i-31] mod 2^32
+  used in Kerberos v4
+
+Attacks on OTP
+  Two time pad - Project Venona and MPEE
+  No integrity, i.e., malleability
+
+  Hybrid encryption is better to use
+  E(k, f) := AES(k, r) || f xor g(r)
+
+RC4 discussion
+  802.11b's RC4 implementation (WEP)
+
+  m||crc(m) xor rc4(IV||k) = ciphertext
+  publish (ciphertext, IV)
+
+  Problem: IV is counter (sometimes), initializes to zero on reboot and
+  frequently wraps around (2^24 IVs only)
+
+  [FMShamir '01] first byte of RC4(0||k) ... RC4(10^6||k) => you can find k
+
+Hardware stream ciphers
+  LFSRs
+  How they were badly used in DVD CSS
+
+Good ciphers?
+  ESTREAM project
+  Trivium, well-designed
+  
