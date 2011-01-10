@@ -59,11 +59,18 @@ RC4 discussion
 
 Hardware stream ciphers
   LFSRs
-  How they were badly used in DVD CSS
+  How they were badly used in DVD CSS, A5/1, Bluetooth E0
 
 Good ciphers?
   ESTREAM project
   Trivium, well-designed for shift registers
   Different ciphers to be used on processors with word/double-word
   granularity
+  For software implementation, Salsa20
   
+1/6/2011
+--------
+Recap, OTP, Stream Cipher, Unpredictable, RC4, LFSR
+
+Random bit generation
+1. s/w generated: RFC 4086, NIST SP-800-90
