@@ -68,9 +68,22 @@ Good ciphers?
   granularity
   For software implementation, Salsa20
   
-1/6/2011
+1/10/2011
 --------
 Recap, OTP, Stream Cipher, Unpredictable, RC4, LFSR
 
 Random bit generation
 1. s/w generated: RFC 4086, NIST SP-800-90
+entropy collector on a loop --> rng state (always xor new information so
+that entropy can only increase)
+- interrupt times
+- scheduler
+
+Linux /dev/random blocks, /dev/urandom never blocks 
+OpenBSD had a bug
+
+Windows has CNG (Crypto Next Generation) BCryptGenRandom (NIST SP-800)
+
+2. h/w generated;
+i810 chipset on Intel, unfortunately not used anymore
+Thermal noise off of two transistors
