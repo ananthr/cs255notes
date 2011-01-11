@@ -86,4 +86,24 @@ Windows has CNG (Crypto Next Generation) BCryptGenRandom (NIST SP-800)
 
 2. h/w generated;
 i810 chipset on Intel, unfortunately not used anymore
-Thermal noise off of two transistors
+Thermal noise off of two transistors and then extractor applied
+
+von Neumann extractor
+01 sequence with bias p 
+extractor (b1...b2n): for i=1 to 2n by 2, if bibi+1 = "01" output 1 else
+output 0
+rate was 75 kbps
+
+glib() not cryptographically random
+math.random() in js is not implemented correctly in (say) Safari
+
+Block ciphers
+DES - classic block cipher
+History: LUCIFER cipher by IBM 1967 (128 bits key/block size)
+
+Feistel Network
+Design of the DES cipher
+Talking about P-boxes and S-boxes
+
+Abstraction of block cipher -- PRPs and PRFs. Formal syntactic and semantic
+definitions
