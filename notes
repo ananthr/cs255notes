@@ -107,3 +107,31 @@ Talking about P-boxes and S-boxes
 
 Abstraction of block cipher -- PRPs and PRFs. Formal syntactic and semantic
 definitions
+
+1/12/2011
+---------
+Pseudorandom Functions and Pseudorandom Permutations
+F: K x X --> K
+
+Security of PRFs -- indistinguishability of real world from ideal world
+
+PRF switching lemma
+
+Multi-message and single message definitions of security. CPA security.
+Semantic security and the security of the OTP
+
+Modes of operation, single message
+1. ECB
+2. Single-Key per use
+3. Deterministic counter mode
+
+Corresponding single message security definition
+
+Modes of operation, multiple messages
+
+Corresponding multiple messages definition
+
+1. Nonce-based encryption
+(k, n) pair is never ever reused
+pick from sufficiently large space randomly, or use a counter
+2. CBC with IV
