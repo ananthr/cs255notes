@@ -135,3 +135,50 @@ Corresponding multiple messages definition
 (k, n) pair is never ever reused
 pick from sufficiently large space randomly, or use a counter
 2. CBC with IV
+
+1/19/2011
+---------
+
+Recap: PRP, PRF definitions
+Semantic security of one-time key, i.e., single message
+Modes of encryption: CTR, CBC. 
+
+CPA security definition. Security of CBC - CPA analysis.
+CBC with unique nonce
+
+Randomized counter mode + CPA analysis
+Nonce-counter mode 
+
+Block cipher Attacks: DES requires 1 (PT, CT) pair to get unique key with
+probability > 1-1/256. 2 (PT, CT) pairs => > 1-1/2^{72}. With 3 (PT, CT)
+pairs, it is for all practical purposes 1. 
+
+Proof: Consider \pi_1,...,\pi_2^{56} as 2^{56} permutations, one for each
+key, from {0,1}^64 -> {0,1}^64. Idealized version. For every m, k 
+Pr[\exists k_1 \neq k such that DES(k_1, m) = DES(k, m)] by union bound for
+every possible key is 2^{56} x 2^{-64}. Therefore, we get 2^{-8} as
+probability there is more than one key.
+
+This generalizes to two, three, or multiple (PT, CT) pairs in a
+straightforward manner.
+
+Breaking DES.
+1. DES challenge and some various benchmarks (distributed.net etc.) from
+bruteforce
+
+Strengthen it by using Triple-DES. E-D-E sometimes used to allow for
+simultaneous implementation of single and triple DES. Sometimes E-D-E with
+k3=k1 used. That is incorrect and there exist attacks.
+
+Why not 2DES? Time-space tradeoff for MITM attack. Storage 2^56 =>
+56.2^{56} attack exists, rather than 2^112.
+
+2nd method to save DES: EX (k1, k2, k3, m) = k1 \xor E(k2, k3\xor m) If we
+model black-box => best possible attack is 2^{|k1|+|k2|}
+DESV and DESW are other possible fixes, but they're quite insecure.
+Two-time pad for one of the keys either during encryption or decryption
+unfortunately.
+
+Side-channel attacks: Simple Power Analysis (SPA) Differential Power
+Analysis (DPA)
+
