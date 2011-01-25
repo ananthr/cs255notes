@@ -182,3 +182,54 @@ unfortunately.
 Side-channel attacks: Simple Power Analysis (SPA) Differential Power
 Analysis (DPA)
 
+1/24/2011
+---------
+
+Recap of various attacks on block ciphers. 
+
+Linear and Differential Cryptanalysis overview. Differential cryptanalysis
+requires more details. 
+
+Linear cryptanalysis talks about biases in xors of specific bits. A small
+bias of \eps will require about O(1/\eps^2) (PT, CT) pairs to get a good
+confidence of those specific bits. 
+
+DES: In the 5th S-Box there's a 2^-21 bias and that works out to getting 14
+bits of information about the key with 2^42 (PT, CT) pairs. Therefore break
+DES in 2^42 rather than 2^56. Over 1000 times faster than brute force
+because of small linearity.
+
+AES description and history behind the cipher. Rijndael.
+
+Key -> Key expansion = Round keys -> Various rounds of encryption using a
+PRF.
+
+4-way independence conjecture. It states that irrespective of how the
+function is implemented, following the general above scheme, if the number
+of rounds can provably provide 4-way independence then the resulting cipher
+is secure. 
+
+Further detailed description of the AES encryption steps (4 steps) and the
+roundkey expansion scheduling with 4x4 matrix notation.
+
+Note, all but one step of AES is linear and even the SBox is implemented as
+an inversion mod 256. This turns out to speed it up in hardware and
+software.
+
+Message Authentication Codes: Definitions, stress on requirement of a key
+between parties -- malicious errors vs random errors.
+WEP uses CRC, therefore guarantees no integrity.
+
+Any secure PRF => secure MAC. sign(k,m)=F(k,m) if the output domain of the
+PRF is large (otherwise simple guesses will lead to existential forgeries).
+
+PRF=>MAC is inefficient. Use CBC-MAC and HMAC (in particular we'll discuss
+NMAC). Small MAC => Big MAC is the problem. We can use small PRF => big PRF
+constructions.
+
+You can truncate a PRF and it is still secure. Same deal for MAC. Except
+truncation will improve the adversaries advantage when guessing randomly. 
+
+ANSI X9.19 standard.
+
+
