@@ -232,4 +232,71 @@ truncation will improve the adversaries advantage when guessing randomly.
 
 ANSI X9.19 standard.
 
+1/26/2011
+---------
 
+Recap of message integrity. Raw CBC, Enc. CBC. Raw CBC secure only for
+prefix-free messages.
+
+CBC-MAC theorem: For every L > 0, F is a secure PRF over (K, X, X) => F_CBC
+over (K^2, X^{\leq L}, X) defined as above satisfies:
+PRFAdv [A, F_CBC] \leq PRFAdv[B, F] + (q^2 L^O(1))/|X|
+
+Unfortunately it is sequential. Open problem for many years to make secure
+parallel MAC. Answered in 2000.
+
+PMAC construction. Let p(k, x) be a masking function.
+
+Basically, you do m_i \xor p(k, i) and feed it to F(k_1, ) to get c_i. Output
+F(k_2, \xor of all c_i) to be the MAC of the message blocks m1...mi...mL
+Security term is 2L^2q^2/|X|
+
+PMAC has advantages of being incremental. You can change one block of
+message and not have to recompute the entire MAC.
+
+Next construction is HMAC. We need to talk about collision resistant hash
+functions. H: M -> T
+
+Def of collision, and CRadv of adversaries -- some small discussion about
+why it only makes sense if the adversary is uniform as opposed to
+non-uniform. SHA-256, Whirpool and SHA-3 competition details.
+
+Wang's attacks on MD5 and SHA-1, in 2005 and the need to design more secure
+CRHFs.
+
+Hash and MAC scheme. M^big -> M is a hash function. (K, M, T) is a MAC.
+Then we can trivially construct BigMac for (K, M^big, T). Just hash it to M
+and then use MAC. An existential forgery will break either the MAC or the
+CHRF. 
+
+Most general attack. Birthday attack. For outputs in |X| finding a
+collision takes roughly \sqrt{|X|} time. 
+
+Constructions: Iterated Merkle-Damgard construction. Message padding. Add
+1000 || message length in 64-bits. Add dummy block if required. 
+
+Lemma: If F is CRHF, then Merkle-Damgard construction is also collision
+resistant. 
+
+Proof. Basically iterate through the assumption of a collision through each
+block starting backward. Either one of the intermediate steps there's a
+collision and therefore we're done, or the two messages are the same and
+there's a contradiction. Requires a little more argument to work out the
+details, including padding block, different length messages etc.
+
+Therefore beauty of this theorem -- suffices to construct a compressing
+function that is CR for small domains. No need to worry about larger
+constructions once we get this done. 
+
+How to? Davies-Meyer construction. 
+
+F(m, h) := E(m, h) \xor h
+
+Here m acts as the key, and h acts as the message for the block cipher.
+Difficult to prove security. Instead we assume ideal cipher model, which
+states that E is basically as set of |K| random permutations which is
+clearly not the case when you instantiate E with any succint program.
+
+Thm: Suppose E_k(x) = E(k, x) is a collection of |K| random permutations
+functions on X then finding a collision in Davies-Meyer will take at least
+2^{n/2} evaluations of E where E(k,x) has outputs in {0,1}^n
