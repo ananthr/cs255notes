@@ -300,3 +300,113 @@ clearly not the case when you instantiate E with any succint program.
 Thm: Suppose E_k(x) = E(k, x) is a collection of |K| random permutations
 functions on X then finding a collision in Davies-Meyer will take at least
 2^{n/2} evaluations of E where E(k,x) has outputs in {0,1}^n
+
+1/31/2011
+---------
+
+R$ecap: Collision resistant hash functions. Compression function (say,
+Daview-Meyer) + M-D paradigm.
+
+Birthday attack.
+
+Provable compression functions. F_{g, h, p} = g^a h^b mod p
+
+Theorem (HW) Finding collision on F => d-log in group
+
+Provable hash functions are really slow
+
+Data integrity (MAC)
+- Any PRF is a secure MAC (eg. AES) 
+Problem: small PRF => big PRF
+
+Suppose we have H: M -> T is a M-D hash function
+MAC from H
+Attempt 1: S(k, m) = H(k||m) vulnerable to extension attack trivially,
+since the compression function is publicly known.
+Attempt 2: HMAC
+S(k, m) := H(k \xor opad || H(k \xor ipad || m)), where opad, ipad are
+constants
+
+Thm: If compression function f, is a PRF (with either of the two inputs to
+be key) then HMAC is a secure PRF (and also secure MAC)
+
+TLS: Must support HMAC-SHA1-96
+
+Note, if H is CHRF, F is secure MAC => s(k, m) := F(k, H(m)) is a secure
+MAC
+
+Authenticated encryption: CPA security (semantic security multi-use key)
+and CT integrity (dec rejects modified CT)
+
+C.I. Game: Queries return E(k, m_i) and the adversary forges a ciphertext
+that is not rejected, and not one of the outputs of previous challenges.
+
+How does WEP do it?
+
+m || CRC(m) 32 bits
+\xor
+RC4(IV||k)
+-------------------
+CT
+
+CRC is inherently a linear function. \exists F such that CRC(m \xor b) =
+CRC(m) \xor F(b)
+
+Now, it is easy to see how you can find a forgery. Modify the corresponding
+bits in the ciphertext and also modify CRC so that it will work even under
+the encryption of RC4.
+
+Constructions using MAC and Encryption black-boxes.
+
+Say, MAC I=(S, V) that is EUF and cipher (E, D) that is CPA secure.
+
+1. MAC-then-Encrypt (SSL/TLS)
+t <- S(k-mac, m), c <- E(k-enc, m||t) output c
+
+2. Encrypt-then-MAC (IPSec)
+c <- E(k-enc, m) t <- S(k-mac, c) and output (c,t)
+
+3. Encryt-and-MAC (SSH)
+c <- E(k-enc, m), t <- S(k-mac, m) send across (c,t)
+
+(3) is not generically secure, because MAC doesn't need to protect secrecy
+of the message
+
+(1) is also problematic. There are artificial MAC and Enc schemes such that
+(1) fails.
+
+(2) is the best way to do it. Because c hides all information about m, and
+t makes sure there can be no modifications of c.
+
+(1) and (3) are perfectly fine for (rand-CBC-enc and PRF-mac) but you can't
+assume what MAC/Enc schemes are given.
+
+Note: k-enc and k-mac are independent keys 
+eg. k-enc <- prf(k, "enc") and k-mac <- prf(k, "mac")
+
+Exception is CCM 802.11i standard -- hen the PRF is evaluated the message
+spaces do not intersect.
+ 
+- compute mac on [ctr || type || version || len || payload] ctr is not sent
+in payload (because it runs on TCP and assumes it is synchronized).
+
+- pad to 3DES block size (8 bytes)
+
+- encrypt with (IV, k-enc)
+
+- prepend header and transmit
+
+First dec, then check pad, structures, and finally, check mac.
+
+TLS 1.0 - if pad is invalid, send "dec failed" message
+if mac is invalid, send "bad record mac" message
+
+(was fixed in 1.1, always send dec failed)
+
+** Don't reveal why it failed **
+
+So far, we have authenticated encryption from CPA+MAC
+
+Can we build authenticated enc from PRF directly?
+Ans: OCB mode. 
+
