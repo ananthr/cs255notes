@@ -399,3 +399,17 @@ So far, we have authenticated encryption from CPA+MAC
 Can we build authenticated enc from PRF directly?
 Ans: OCB mode (very similar to PMAC)
 
+2/02/2011
+---------
+
+Sharing keys between n players. O(n^2) keys required.
+Better:- KDC. 
+
+An example of a scheme requiring nonces etc. 
+Some of the drawbacks, TTP required, and a single point of failure. The
+advantage is it requires symmetric ciphers only. To get asymmetric ciphers,
+you require lots more theory.
+
+Public Key Crypto! 
+
+Introduction to groups, modular arithmetic.
