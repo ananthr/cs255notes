@@ -418,15 +418,30 @@ Introduction to groups, modular arithmetic.
 ---------
 
 Recap of groups/modular arithmetic
-
 Exponentiation
-
 Public-key encryption
-
 Diffie-Hellman
-
 Discrete Log
 
 2/09/2011
 ---------
 
+Discussion of various groups. Elliptic curves
+
+Pollard Rho and General Number Field Sieve time bounds
+Diffie Hellman and ElGamal encryption
+
+Hybrid encryption scheme -- ElGamal hybrid encryption
+ElGamal CPA secure under random oracle and DDH.
+
+Motivation and definition of CCA security -- makes sense for PKC
+
+Thm: ElGamal system is CCA secure under random oracle, "interactive"-DH
+assumption, and the symm cipher is EUF-CMA/CPA secure.
+
+Trapdoor one-way function
+
+A CCA secure scheme using TDFs. 
+
+Number theoretic construction of TDFs -- RSA function and some background
+about the Euler \varphi function.
